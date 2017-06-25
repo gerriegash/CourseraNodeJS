@@ -13,6 +13,13 @@ var port = 6969;
 var server = http.createServer(function(req,res) {
 
     console.log("Request from ${req.url} came for ${req.method} ");
+
+    //just to not let server crash
+    req.on('error',function(error){
+       console.error("'Errr! SOme error happenend");
+    });
+
+    console.log("mplemented error listener");
     if(req.method == "GET"){
 
         var fileUrl;
