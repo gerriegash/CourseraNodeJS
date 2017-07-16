@@ -5,6 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var config = require('./config');
+var authenticate = require('./authenticate');
 var passport = require('passport');
 var passportLocal = require('passport-local');
 
@@ -51,12 +52,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 //Passport config
-var user = require('./models/user');
 app.use(passport.initialize());
-passport.use(new LocalStrategy(user.authenticate()));
-passport.serializeUser(user.serializeUser());
-passport.deserializeUser(user.deserializeUser());
-
 
 app.use(express.static(path.join(__dirname, 'public')));
 
